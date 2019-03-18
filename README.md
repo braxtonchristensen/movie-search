@@ -44,8 +44,8 @@ yarn storybook
 
 ## The Tech
 * Express - because it's unopinionated, minimalist, and fast to setup.
-* Redis - data caching for MovieDetails (I couldn't think of a good way to cache searches 😟)
-* Typescript - because of the community/Turing Completeness.
+* Redis - data caching for MovieDetails/PersonDetails (I couldn't think of a good way to cache searches 😟)
+* Typescript - because of the community.
 * React - because 😍
 * GraphQL - because 😍
 * Storybook - for isolated component development.
