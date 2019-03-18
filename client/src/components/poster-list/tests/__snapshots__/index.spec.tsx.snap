@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PosterList /> snapshots should match snapshot 1`] = `
+<div
+  className="sc-bdVaJa lnRSUj"
+>
+  <img
+    alt="This will be dynamic and will be used for accessibility"
+    src="https://image.tmdb.org/t/p/w185/gpxjoE0yvRwIhFEJgNArtKtaN7S.jpg"
+  />
+  <img
+    alt="This will be dynamic and will be used for accessibility"
+    src="https://image.tmdb.org/t/p/w185/4RnCeRzvI1xk5tuNWjpDKzSnJDk.jpg"
+  />
+  <img
+    alt="This will be dynamic and will be used for accessibility"
+    src="https://image.tmdb.org/t/p/w185/3PEAkZHa8ehfUkuKbzmQNRTTAAs.jpg"
+  />
+  <img
+    alt="This will be dynamic and will be used for accessibility"
+    src="https://image.tmdb.org/t/p/w185/zDJ4GVch7Iw2i0j84ceoElRUZUR.jpg"
+  />
+  <img
+    alt="This will be dynamic and will be used for accessibility"
+    src="https://image.tmdb.org/t/p/w185/gpxjoE0yvRwIhFEJgNArtKtaN7S.jpg"
+  />
+  <img
+    alt="This will be dynamic and will be used for accessibility"
+    src="https://image.tmdb.org/t/p/w185/4RnCeRzvI1xk5tuNWjpDKzSnJDk.jpg"
+  />
+  <img
+    alt="This will be dynamic and will be used for accessibility"
+    src="https://image.tmdb.org/t/p/w185/3PEAkZHa8ehfUkuKbzmQNRTTAAs.jpg"
+  />
+  <img
+    alt="This will be dynamic and will be used for accessibility"
+    src="https://image.tmdb.org/t/p/w185/zDJ4GVch7Iw2i0j84ceoElRUZUR.jpg"
+  />
+</div>
+`;
