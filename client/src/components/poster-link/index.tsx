@@ -4,8 +4,8 @@ import Poster, { PosterSize } from '../poster';
 
 
 interface Props extends LinkProps {
-  path: string;
   title: string;
+  path?: string | null;
   size?: PosterSize;
 }
 

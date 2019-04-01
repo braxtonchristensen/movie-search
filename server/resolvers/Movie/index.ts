@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import { init as redisInit, get, set, cleanup } from '../../utils/redis';
+import { MovieDetailsResponse, MovieCreditsResponse } from '../../types/MovieResponse';
 dotenv.config();
 
 const BASE_URL = 'https://api.themoviedb.org/3/';
@@ -128,7 +129,7 @@ export const resolvers = {
           return Promise.resolve(JSON.parse(cachedData));
         }
         
-        const [ detailsResponse, creditsResponse ] = await Promise.all([
+        const [ detailsResponse, creditsResponse ]: [MovieDetailsResponse, MovieCreditsResponse] = await Promise.all([
           await (
             await fetch(tmbdMovieApi(id))
           ).json(),

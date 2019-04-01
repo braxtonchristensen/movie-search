@@ -1,42 +1,21 @@
-import React, { SFC, useState } from 'react';
+import React, { SFC } from 'react';
 import { Query } from "react-apollo";
 import { RouteComponentProps, match, Link } from 'react-router-dom';
 import gql from "graphql-tag";
-import styled from 'styled-components';
 import PosterLink from '../../components/poster-link'
 import PosterList from '../../components/poster-list'
 import Poster, { PosterSize } from '../../components/poster';
+import {
+  Container,
+  I,
+  Main,
+  Details,
+  Title,
+  Overview,
+} from './Components';
+import { ActorDetailsResponse, ActorDetailsVariable } from '../../types/Api';
 
-const Container  = styled.div`
-  color: #FFF;
-`;
-
-const I = styled.i`
-  font-size: 2rem;
-  padding: 0.5em;
-  color: #FFF;
-`;
-
-const Main = styled.div`
-  padding: 2em;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Details = styled.div`
-  width: 350px;
-  flex-shrink: 0;
-  padding: .5em;
-`;
-const Title = styled.div`
-  margin: 10px;
-  font-size: 2rem;
-`;
-  const Overview = styled.div`
-  margin: 10px;
-  color: #CCC;
-  font-size: 1rem;
-`;
+class ActorDetailsQuery extends Query<ActorDetailsResponse, ActorDetailsVariable> {}
 
 interface Props extends RouteComponentProps {
   match: match<{ id: string }>;
@@ -62,10 +41,12 @@ const Person: SFC<Props> = ({ match }) => {
   const id = match.params.id;
 
   return (
-    <Query query={ personQuery } variables={ { id: Number(id) } }>
+    <ActorDetailsQuery query={ personQuery } variables={ { id: Number(id) } }>
       {({ loading, error, data }) => {
+        console.log('data: ', JSON.stringify(data));
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error :(</p>;
+        if (!data) return <p>Sad no data here.</p>
 
         return (
           <Container>
@@ -74,12 +55,14 @@ const Person: SFC<Props> = ({ match }) => {
                 home
               </I>
             </Link>
-            <Main>              
-              <Poster
-                path={ data.person.profile_path }
-                title={ data.person.name }
-                size={ PosterSize.M }
-              />
+            <Main>
+              <div>                
+                <Poster
+                  path={ data.person.profile_path }
+                  title={ data.person.name }
+                  size={ PosterSize.M }
+                />
+              </div>
               <Details>
                 <Title>{ data.person.name }</Title>
                 <Overview>{ data.person.biography }</Overview>
@@ -87,11 +70,11 @@ const Person: SFC<Props> = ({ match }) => {
             </Main>
             <PosterList>
               {
-                data.person.cast.map((movie: any) =>
+                data.person.cast.map((movie) =>
                   <PosterLink
                     key={ movie.id }
                     to={`/movie/${movie.id}`}
-                    title={movie.name}
+                    title={movie.title}
                     path={ movie.poster_path }
                   />
                 )
@@ -100,7 +83,7 @@ const Person: SFC<Props> = ({ match }) => {
           </Container>
         )
       }}
-    </Query>
+    </ActorDetailsQuery>
    )
 }
 

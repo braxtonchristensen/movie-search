@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import { init as redisInit, get, set, cleanup } from '../../utils/redis';
+import { ActorDetailsResponse, ActorCreditsResponse } from '../../types/ActorResponse';
 dotenv.config();
 
 const BASE_URL = 'https://api.themoviedb.org/3/';
@@ -64,7 +65,7 @@ export const resolvers = {
         }
         
         // Use Promise.all to run queries and parsing concurrently
-        const [ detailsResponse, creditsResponse ] = await Promise.all([
+        const [ detailsResponse, creditsResponse ]: [ ActorDetailsResponse, ActorCreditsResponse ] = await Promise.all([
           await (
             await fetch(tmbdPersonApi(id))
           ).json(),

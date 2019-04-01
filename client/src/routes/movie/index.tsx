@@ -1,53 +1,22 @@
 import React, { SFC } from 'react';
-import styled from 'styled-components';
 import { Query } from "react-apollo";
 import { RouteComponentProps, match, Link } from 'react-router-dom';
 import gql from "graphql-tag";
 import PosterList from '../../components/poster-list'
 import PosterLink from '../../components/poster-link'
 import Poster, { PosterSize } from '../../components/poster';
+import { MovieDetailsResponse, MovieDetailsVariable } from '../../types/Api';
+import {
+  Container,
+  I,
+  Main,
+  Details,
+  Title,
+  TagLine,
+  Overview,
+} from './Components';
 
-const Container = styled.div<{ backDrop: string }>`
-  overflow: scroll;
-  color: #FFF;
-  background: ${(p: { backDrop: string }) => `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://image.tmdb.org/t/p/original${ p.backDrop })`};
-  background-size: cover;
-  background-repeat:   no-repeat;
-  background-position: center center; 
-  height: 100vh;
-  width: 100vw;
-`;
-
-const I = styled.i`
-  font-size: 2rem;
-  padding: 0.5em;
-  color: #FFF;
-`;
-
-const Main = styled.div`
-  padding: 2em;
-  display: flex;
-  flex-wrap: wrap;
-`;
-const Details = styled.div`
-  width: 350px;
-  flex-shrink: 0;
-  padding: .5em;
-`;
-const Title = styled.div`
-  margin: 10px;
-  font-size: 2rem;
-  `;
-  const TagLine = styled.div`
-  margin: 10px;
-  color: #CCC;
-  font-size: 1.25rem;
-  `;
-  const Overview = styled.div`
-  margin: 10px;
-  color: #CCC;
-  font-size: 1rem;
-`;
+class MovieDetailsQuery extends Query<MovieDetailsResponse, MovieDetailsVariable> {}
 
 interface Props extends RouteComponentProps {
   match: match<{ id: string }>;
@@ -75,10 +44,11 @@ const Movie: SFC<Props> = ({ match }) => {
   const id = match.params.id;
 
   return (
-    <Query query={ movieQuery } variables={ { id: Number(id) } }>
+    <MovieDetailsQuery query={ movieQuery } variables={ { id: Number(id) } }>
       {({ loading, error, data }) => {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error :(</p>;
+        if (!data) return <p>Sad No Data :(</p>;
 
         return (
           <Container backDrop={ data.movie.backdrop_path }>
@@ -87,12 +57,14 @@ const Movie: SFC<Props> = ({ match }) => {
                 home
               </I>
             </Link>
-            <Main>              
-              <Poster
-                title={ data.movie.title }
-                path={ data.movie.poster_path }
-                size={ PosterSize.M }
-              />
+            <Main>
+              <div>                
+                <Poster
+                  title={ data.movie.title }
+                  path={ data.movie.poster_path }
+                  size={ PosterSize.M }
+                />
+              </div>
               <Details>
                 <Title>{ data.movie.title }</Title>
                 <TagLine>{ data.movie.release_date }</TagLine>
@@ -103,7 +75,7 @@ const Movie: SFC<Props> = ({ match }) => {
             <TagLine>Cast</TagLine>
             <PosterList>              
               {
-                data.movie.cast.map((person: any) =>
+                data.movie.cast.map((person) =>
                   <PosterLink
                     key={ person.id }
                     to={`/people/${person.id}`}
@@ -117,7 +89,7 @@ const Movie: SFC<Props> = ({ match }) => {
           
         )
       }}
-    </Query>
+    </MovieDetailsQuery>
    )
 }
 
