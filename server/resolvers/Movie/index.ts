@@ -1,19 +1,6 @@
 import { gql } from 'apollo-server-express';
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
 import { init as redisInit, get, set, cleanup } from '../../utils/redis';
 import { MovieDetailsResponse, MovieCreditsResponse } from '../../types/MovieResponse';
-dotenv.config();
-
-const BASE_URL = 'https://api.themoviedb.org/3/';
-const API_QS = `?api_key=${process.env.TMDB_API_KEY}`;
-
-const tmbdSearchApi = (search: string, page = 1) =>
-  `${BASE_URL}search/movie${API_QS}&query=${encodeURI(search)}&include_adult=false&page=${page}&language=en-US`
-const tmbdMovieApi = (id: number) => `${BASE_URL}movie/${id}${API_QS}`
-const tmbdMovieCreditsApi = (id: number) => `${BASE_URL}movie/${id}/credits${API_QS}`
-const tmbdPopularApi = (page = 1) =>
-  `${BASE_URL}movie/popular${API_QS}&page=${page}`
 
 export const typeDef = gql`
   extend type Query {
@@ -87,16 +74,13 @@ export const resolvers = {
     movies: async (
       _: undefined,
       { search, page }: { search: string, page: number },
+      { dataSources }: any,
     ) => {
       try {
         const response = search
-          ? await (
-              await fetch(tmbdSearchApi(search, page))
-            ).json()
-          : await (
-              await fetch(tmbdPopularApi(page))
-            ).json();;
-        
+          ? await dataSources.movieApi.searchMovies(search, page)
+          : await dataSources.movieApi.getPopularMovies(page)
+
         return {
           page: response.page,
           hasNextPage: response.page < response.total_pages,
@@ -107,9 +91,11 @@ export const resolvers = {
         throw new Error(err);
       }
     },
+
     movie: async(
       _: undefined,
-      { id }: { id: number }
+      { id }: { id: number },
+      { dataSources }: any,
     ) => {
       /**
        * Try to connect to redis if it is not available continue operations but show
@@ -130,12 +116,8 @@ export const resolvers = {
         }
         
         const [ detailsResponse, creditsResponse ]: [MovieDetailsResponse, MovieCreditsResponse] = await Promise.all([
-          await (
-            await fetch(tmbdMovieApi(id))
-          ).json(),
-          await (
-            await fetch(tmbdMovieCreditsApi(id))
-          ).json(),
+          dataSources.movieApi.getMovieDetails(id),
+          dataSources.movieApi.getMovieCredits(id),
         ]);
 
         const mergedData = { ...detailsResponse, ...creditsResponse };
@@ -152,3 +134,5 @@ export const resolvers = {
     },
   },
 };
+
+export { default as dataSource } from './datasource';

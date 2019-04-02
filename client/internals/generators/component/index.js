@@ -1,5 +1,3 @@
-'use strict';
-
 const componentExists = require('../utils/componentExists');
 
 module.exports = {

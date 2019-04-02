@@ -1,0 +1,1066 @@
+import { gql } from 'apollo-server-express';
+
+// Payloads
+export const GET_POPULAR = gql`
+  query Movies {
+    movies(page: 2){
+      page
+      hasPrevPage
+      hasNextPage
+      movies {
+        title
+      }
+    }
+  }
+`;
+
+export const SEARCH_MOVIES = gql`
+  query Movies {
+    movies(search: "happy", page: 2){
+      page
+      hasPrevPage
+      hasNextPage
+      movies {
+        title
+      }
+    }
+  }
+`;
+
+export const GET_MOVIE = gql`
+  query Movie {
+    movie(id: 9614){
+      title
+      cast {
+        name
+      }
+    }
+  }
+`;
+
+// Raw Responses
+export const popularPageTwoRaw = {
+  page: 2,
+  total_results: 19746,
+  total_pages: 988,
+  results:
+    [{
+      vote_count: 1315,
+      id: 428078,
+      video: false,
+      vote_average: 6,
+      title: 'Mortal Engines',
+      popularity: 89.484,
+      poster_path: '/uXJVpPXxZO4L8Rz3IG1Y8XvZJcg.jpg',
+      original_language: 'en',
+      original_title: 'Mortal Engines',
+      genre_ids: [Array],
+      backdrop_path: '/jnOuttTfG9KKpmOZtprC4pA1AlZ.jpg',
+      adult: false,
+      overview: 'Many thousands of years in the future, Earth’s cities roam the globe on huge wheels, devouring each other in a struggle for ever diminishing resources. On one of these massive traction cities, the old London, Tom Natsworthy has an unexpected encounter with a mysterious young woman from the wastelands who will change the course of his life forever.',
+      release_date: '2018-11-27'
+    },
+    {
+      vote_count: 1885,
+      id: 480530,
+      video: false,
+      vote_average: 6.6,
+      title: 'Creed II',
+      popularity: 85.492,
+      poster_path: '/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg',
+      original_language: 'en',
+      original_title: 'Creed II',
+      genre_ids: [Array],
+      backdrop_path: '/6JHYYbvoSuQ95ceGx8Oeg8zzAjg.jpg',
+      adult: false,
+      overview: 'Between personal obligations and training for his next big fight against an opponent with ties to his family\'s past, Adonis Creed is up against the challenge of his life.',
+      release_date: '2018-11-21'
+    },
+    {
+      vote_count: 0,
+      id: 299534,
+      video: false,
+      vote_average: 0,
+      title: 'Avengers: Endgame',
+      popularity: 78.509,
+      poster_path: '/bJLYrLIHT1r7cikhWGbpZkxlUpA.jpg',
+      original_language: 'en',
+      original_title: 'Avengers: Endgame',
+      genre_ids: [Array],
+      backdrop_path: '/orjiB3oUIsyz60hoEqkiGpy5CeO.jpg',
+      adult: false,
+      overview: 'After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos\' actions and restore order to the universe once and for all, no matter what consequences may be in store.',
+      release_date: '2019-04-24'
+    },
+    {
+      vote_count: 1123,
+      id: 400650,
+      video: false,
+      vote_average: 6.7,
+      title: 'Mary Poppins Returns',
+      popularity: 77.575,
+      poster_path: '/uTVGku4LibMGyKgQvjBtv3OYfAX.jpg',
+      original_language: 'en',
+      original_title: 'Mary Poppins Returns',
+      genre_ids: [Array],
+      backdrop_path: '/cwiJQXezWz876K3jS57Sq56RYCZ.jpg',
+      adult: false,
+      overview: 'In Depression-era London, a now-grown Jane and Michael Banks, along with Michael\'s three children, are visited by the enigmatic Mary Poppins following a personal loss. Through her unique magical skills, and with the aid of her friend Jack, she helps the family rediscover the joy and wonder missing in their lives.',
+      release_date: '2018-12-13'
+    },
+    {
+      vote_count: 5,
+      id: 532321,
+      video: false,
+      vote_average: 4.6,
+      title: 'Re:Zero kara Hajimeru Isekai Seikatsu Memory Snow',
+      popularity: 76.507,
+      poster_path: '/xqR4ABkFTFYe8NDJi3knwWX7zfn.jpg',
+      original_language: 'ja',
+      original_title: 'Re:ゼロから始める異世界生活 Memory Snow',
+      genre_ids: [Array],
+      backdrop_path: '/4wcj0N2D1Y70ADVjNRsqfQhQEGN.jpg',
+      adult: false,
+      overview: 'Subaru and friends finally get a moment of peace, and Subaru goes on a certain secret mission that he must not let anyone find out about! However, even though Subaru is wearing a disguise, Petra and other children of the village immediately figure out who he is. Now that his mission was exposed within five seconds of it starting, what will happen with Subaru\'s "date course" with Emilia?',
+      release_date: '2018-10-06'
+    },
+    {
+      vote_count: 31,
+      id: 400157,
+      video: false,
+      vote_average: 5.7,
+      title: 'Wonder Park',
+      popularity: 76.465,
+      poster_path: '/gwdG2vdLLCGrTiNf6MA9JVxnZkK.jpg',
+      original_language: 'en',
+      original_title: 'Wonder Park',
+      genre_ids: [Array],
+      backdrop_path: '/nJyAdKPnW15IAvC6sLBTE0lp6Dv.jpg',
+      adult: false,
+      overview: 'The story of a magnificent amusement park where the imagination of a wildly creative girl named June comes alive.',
+      release_date: '2019-03-14'
+    },
+    {
+      vote_count: 6579,
+      id: 424694,
+      video: false,
+      vote_average: 8.1,
+      title: 'Bohemian Rhapsody',
+      popularity: 74.597,
+      poster_path: '/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg',
+      original_language: 'en',
+      original_title: 'Bohemian Rhapsody',
+      genre_ids: [Array],
+      backdrop_path: '/xcaSYLBhmDzJ6P14bcKe0KTh3QV.jpg',
+      adult: false,
+      overview: 'Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the music world by storm when they form the rock \'n\' roll band Queen in 1970. Hit songs become instant classics. When Mercury\'s increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest challenge yet – finding a way to keep the band together amid the success and excess.',
+      release_date: '2018-10-24'
+    },
+    {
+      vote_count: 2664,
+      id: 490132,
+      video: false,
+      vote_average: 8.3,
+      title: 'Green Book',
+      popularity: 73.705,
+      poster_path: '/7BsvSuDQuoqhWmU2fL7W2GOcZHU.jpg',
+      original_language: 'en',
+      original_title: 'Green Book',
+      genre_ids: [Array],
+      backdrop_path: '/78PjwaykLY2QqhMfWRDvmfbC6EV.jpg',
+      adult: false,
+      overview: 'Tony Lip, a bouncer in 1962, is hired to drive pianist Don Shirley on a tour through the Deep South in the days when African Americans, forced to find alternate accommodations and services due to segregation laws below the Mason-Dixon Line, relied on a guide called The Negro Motorist Green Book.',
+      release_date: '2018-11-16'
+    },
+    {
+      vote_count: 13331,
+      id: 671,
+      video: false,
+      vote_average: 7.8,
+      title: 'Harry Potter and the Philosopher\'s Stone',
+      popularity: 70.475,
+      poster_path: '/dCtFvscYcXQKTNvyyaQr2g2UacJ.jpg',
+      original_language: 'en',
+      original_title: 'Harry Potter and the Philosopher\'s Stone',
+      genre_ids: [Array],
+      backdrop_path: '/pZIiPOoNhhzVpBuVEpDK7vbBz4l.jpg',
+      adult: false,
+      overview: 'Harry Potter has lived under the stairs at his aunt and uncle\'s house his whole life. But on his 11th birthday, he learns he\'s a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school\'s kindly headmaster, Harry uncovers the truth about his parents\' deaths -- and about the villain who\'s to blame.',
+      release_date: '2001-11-16'
+    },
+    {
+      vote_count: 2067,
+      id: 404368,
+      video: false,
+      vote_average: 7.2,
+      title: 'Ralph Breaks the Internet',
+      popularity: 70.38,
+      poster_path: '/lvfIaThG5HA8THf76nghKinjjji.jpg',
+      original_language: 'en',
+      original_title: 'Ralph Breaks the Internet',
+      genre_ids: [Array],
+      backdrop_path: '/88poTBTafMXaz73vYi3c74g0y2k.jpg',
+      adult: false,
+      overview: 'Video game bad guy Ralph and fellow misfit Vanellope von Schweetz must risk it all by traveling to the World Wide Web in search of a replacement part to save Vanellope\'s video game, "Sugar Rush." In way over their heads, Ralph and Vanellope rely on the citizens of the internet -- the netizens -- to help navigate their way, including an entrepreneur named Yesss, who is the head algorithm and the heart and soul of trend-making site BuzzzTube.',
+      release_date: '2018-11-20'
+    },
+    {
+      vote_count: 30,
+      id: 438674,
+      video: false,
+      vote_average: 6.5,
+      title: 'Dragged Across Concrete',
+      popularity: 69.349,
+      poster_path: '/fVG4a27ImyPS4vvNMjCtan3QhDl.jpg',
+      original_language: 'en',
+      original_title: 'Dragged Across Concrete',
+      genre_ids: [Array],
+      backdrop_path: '/sZUbg9K8zGiUmeVYSlUNelVcuzM.jpg',
+      adult: false,
+      overview: 'Two policemen, one an old-timer, the other his volatile younger partner, find themselves suspended when a video of their strong-arm tactics becomes the media\'s cause du jour. Low on cash and with no other options, these two embittered soldiers descend into the criminal underworld to gain their just due, but instead find far more than they wanted awaiting them in the shadows.',
+      release_date: '2019-02-21'
+    },
+    {
+      vote_count: 24,
+      id: 548066,
+      video: false,
+      vote_average: 4.3,
+      title: 'Level 16',
+      popularity: 69.222,
+      poster_path: '/ibw9NX3EO51SYkJ7NI9oH3rkdZ1.jpg',
+      original_language: 'en',
+      original_title: 'Level 16',
+      genre_ids: [Array],
+      backdrop_path: '/n6woQ3TpzAJk9TyxE7HdfBlQmbb.jpg',
+      adult: false,
+      overview: 'The teenage girls of Vestalis Academy are meticulously trained in the art of being “clean girls,” practicing the virtues of perfect femininity. But what exactly are they being trained for? Vivien intends to find out.',
+      release_date: '2018-02-20'
+    },
+    {
+      vote_count: 898,
+      id: 429197,
+      video: false,
+      vote_average: 7.2,
+      title: 'Vice',
+      popularity: 68.097,
+      poster_path: '/1gCab6rNv1r6V64cwsU4oEr649Y.jpg',
+      original_language: 'en',
+      original_title: 'Vice',
+      genre_ids: [Array],
+      backdrop_path: '/7TTlvADXSxg0yzlGTZFExmw4TSC.jpg',
+      adult: false,
+      overview: 'George W. Bush picks Dick Cheney, the CEO of Halliburton Co., to be his Republican running mate in the 2000 presidential election. No stranger to politics, Cheney\'s impressive résumé includes stints as White House chief of staff, House Minority Whip and defense secretary. When Bush wins by a narrow margin, Cheney begins to use his newfound power to help reshape the country and the world.',
+      release_date: '2018-12-25'
+    },
+    {
+      vote_count: 4866,
+      id: 332562,
+      video: false,
+      vote_average: 7.5,
+      title: 'A Star Is Born',
+      popularity: 66.659,
+      poster_path: '/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg',
+      original_language: 'en',
+      original_title: 'A Star Is Born',
+      genre_ids: [Array],
+      backdrop_path: '/wqtaHWOEZ3rXDJ8c6ZZShulbo18.jpg',
+      adult: false,
+      overview: 'Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally\'s career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.',
+      release_date: '2018-10-03'
+    },
+    {
+      vote_count: 27,
+      id: 586347,
+      video: false,
+      vote_average: 5.9,
+      title: 'The Hard Way',
+      popularity: 64.812,
+      poster_path: '/z4UNeIfvuqUrbSANkZBzKyrr0tT.jpg',
+      original_language: 'en',
+      original_title: 'The Hard Way',
+      genre_ids: [Array],
+      backdrop_path: '/j3R1mUTaBogjU97be4eABlvZWhH.jpg',
+      adult: false,
+      overview: 'After learning of his brother\'s death during a mission in Romania, a former soldier joins two allies to hunt down a mysterious enemy and take his revenge.',
+      release_date: '2019-03-20'
+    },
+    {
+      vote_count: 11393,
+      id: 284054,
+      video: false,
+      vote_average: 7.4,
+      title: 'Black Panther',
+      popularity: 63.85,
+      poster_path: '/uxzzxijgPIY7slzFvMotPv8wjKA.jpg',
+      original_language: 'en',
+      original_title: 'Black Panther',
+      genre_ids: [Array],
+      backdrop_path: '/6ELJEzQJ3Y45HczvreC3dg0GV5R.jpg',
+      adult: false,
+      overview: 'King T\'Challa returns home from America to the reclusive, technologically advanced African nation of Wakanda to serve as his country\'s new leader. However, T\'Challa soon finds that he is challenged for the throne by factions within his own country as well as without. Using powers reserved to Wakandan kings, T\'Challa assumes the Black Panther mantel to join with girlfriend Nakia, the queen-mother, his princess-kid sister, members of the Dora Milaje (the Wakandan \'special forces\') and an American secret agent, to prevent Wakanda from being dragged into a world war.',
+      release_date: '2018-02-13'
+    },
+    {
+      vote_count: 99,
+      id: 508763,
+      video: false,
+      vote_average: 6.8,
+      title: 'A Dog\'s Way Home',
+      popularity: 63.432,
+      poster_path: '/pZn87R7gtmMCGGO8KeaAfZDhXLg.jpg',
+      original_language: 'en',
+      original_title: 'A Dog\'s Way Home',
+      genre_ids: [Array],
+      backdrop_path: '/w7MsyOpP003FYhsiTgVHa3rNsrz.jpg',
+      adult: false,
+      overview: 'A Dog’s Way Home chronicles the heartwarming adventure of Bella, a dog who embarks on an epic 400-mile journey home after she is separated from her beloved human.',
+      release_date: '2019-01-10'
+    },
+    {
+      vote_count: 145,
+      id: 351044,
+      video: false,
+      vote_average: 6.6,
+      title: 'Welcome to Marwen',
+      popularity: 62.791,
+      poster_path: '/o45VIAUYDcVCGuzd43l8Sr5Dfti.jpg',
+      original_language: 'en',
+      original_title: 'Welcome to Marwen',
+      genre_ids: [Array],
+      backdrop_path: '/q9hnJ9SzwcF30seRtXEzLd5l1gw.jpg',
+      adult: false,
+      overview: 'When a devastating attack shatters Mark Hogancamp and wipes away all memories, no one expected recovery. Putting together pieces from his old and new life, Mark meticulously creates a wondrous town named Marwen where he can heal and be heroic. As he builds an astonishing art installation — a testament to the most powerful women he knows — through his fantasy world, he draws strength to triumph in the real one.',
+      release_date: '2018-12-21'
+    },
+    {
+      vote_count: 9370,
+      id: 245891,
+      video: false,
+      vote_average: 7.1,
+      title: 'John Wick',
+      popularity: 59.84,
+      poster_path: '/b9uYMMbm87IBFOq59pppvkkkgNg.jpg',
+      original_language: 'en',
+      original_title: 'John Wick',
+      genre_ids: [Array],
+      backdrop_path: '/umC04Cozevu8nn3JTDJ1pc7PVTn.jpg',
+      adult: false,
+      overview: 'Ex-hitman John Wick comes out of retirement to track down the gangsters that took everything from him.',
+      release_date: '2014-10-22'
+    },
+    {
+      vote_count: 126,
+      id: 487297,
+      video: false,
+      vote_average: 5.4,
+      title: 'What Men Want',
+      popularity: 59.61,
+      poster_path: '/30IiwvIRqPGjUV0bxJkZfnSiCL.jpg',
+      original_language: 'en',
+      original_title: 'What Men Want',
+      genre_ids: [Array],
+      backdrop_path: '/umecegsPpKr2ZXA62Da9CQBVoIO.jpg',
+      adult: false,
+      overview: 'Magically able to hear what men are thinking, a sports agent uses her newfound ability to turn the tables on her overbearing male colleagues.',
+      release_date: '2019-02-08'
+    }]
+}
+
+export const searchPageTwoRaw = {
+  page: 2,
+  total_results: 732,
+  total_pages: 37,
+  results:
+    [{
+      vote_count: 123,
+      id: 400608,
+      video: false,
+      vote_average: 8.4,
+      title: 'Bo Burnham: Make Happy',
+      popularity: 4.746,
+      poster_path: '/a83v2bwqbfCUTt4HXCoTRMXgWCm.jpg',
+      original_language: 'en',
+      original_title: 'Bo Burnham: Make Happy',
+      genre_ids: [Array],
+      backdrop_path: '/nicDo6SnBxK93ROGAhpKTOAhy2i.jpg',
+      adult: false,
+      overview: 'Combining his trademark wit and self-deprecating humor with original music, Bo Burnham offers up his unique twist on life in this stand-up special about  life, death, sexuality, hypocrisy, mental illness and Pringles cans.',
+      release_date: '2016-06-03'
+    },
+    {
+      vote_count: 61,
+      id: 37936,
+      video: false,
+      vote_average: 6.1,
+      title: 'Happy Birthday to Me',
+      popularity: 3.83,
+      poster_path: '/yxGYpW43UzZuy4yvCP6Rzb5wyvS.jpg',
+      original_language: 'en',
+      original_title: 'Happy Birthday to Me',
+      genre_ids: [Array],
+      backdrop_path: '/56awxbFImCRdaVVCtwj4eaH1Lbc.jpg',
+      adult: false,
+      overview: 'Virginia is proud that she belongs to a clique. The best students at a private school. But before her 18th birthday, a grueling set of murders take place and her friends are the ones who are falling prey. Could it be her? She suffers from blackouts due to a freak accident one year earlier. We soon learn the truth behind her accident and what is going on...',
+      release_date: '1981-05-15'
+    },
+    {
+      vote_count: 24,
+      id: 55059,
+      video: false,
+      vote_average: 5.7,
+      title: 'Happy Together',
+      popularity: 2.194,
+      poster_path: '/fjURGbSXCOZjEBkhX9kME21yAiP.jpg',
+      original_language: 'en',
+      original_title: 'Happy Together',
+      genre_ids: [Array],
+      backdrop_path: '/yY8iwnPW2cV1TDAob9Xq3yIUqMn.jpg',
+      adult: false,
+      overview: 'Christopher is an ambitious college freshman, striving to become a writer. Through a computer fault he\'s assigned the same room as Alex, a real party freak and... a girl! He\'s annoyed and tries to get a different room as soon as possible, but when he learns to know her, he also starts to like her. She not only improves his sexual life, but also his writing skills',
+      release_date: '1989-05-04'
+    },
+    {
+      vote_count: 69,
+      id: 51017,
+      video: false,
+      vote_average: 6.8,
+      title: 'Madea\'s Big Happy Family',
+      popularity: 5.163,
+      poster_path: '/AuCloWNPDm4tH9nyMoG4i3IMUYo.jpg',
+      original_language: 'en',
+      original_title: 'Madea\'s Big Happy Family',
+      genre_ids: [Array],
+      backdrop_path: '/fO30X4OQ6Zuoi3brbMH6z2pi6yJ.jpg',
+      adult: false,
+      overview: 'Shirley has important news for her family, but she has five grown children with different lifestyles and finds it difficult to get them and the kids all together. So in steps Madea, the Matriarch General, to put the family\'s life in perspective with a hilarious twist on financial difficulties, drugs and, most important, family secrets. The next generation has a lot to learn. In her own way, Madea expresses how deliverance won\'t change you to be someone else, but will allow you to be who you really are.',
+      release_date: '2011-04-22'
+    },
+    {
+      vote_count: 59,
+      id: 203321,
+      video: false,
+      vote_average: 6.5,
+      title: 'Not Another Happy Ending',
+      popularity: 3.378,
+      poster_path: '/bTdAfO55Zz4usb7Ce2gElcPu07z.jpg',
+      original_language: 'en',
+      original_title: 'Not Another Happy Ending',
+      genre_ids: [Array],
+      backdrop_path: '/jJ7jmkapzj6cvmNtuOAACNyBrkT.jpg',
+      adult: false,
+      overview: 'When a struggling publisher discovers his only successful author is blocked he knows he has to unblock her or he\'s finished. With her newfound success, she\'s become too damn happy and she can\'t write when she\'s happy.The only trouble is, the worse he makes her feel, the more he realises he\'s in love with her.',
+      release_date: '2013-10-11'
+    },
+    {
+      vote_count: 18,
+      id: 24273,
+      video: false,
+      vote_average: 5.3,
+      title: 'Happy Campers',
+      popularity: 2.071,
+      poster_path: '/xUB8brmv36Yk7rSiVdGuYIGSghf.jpg',
+      original_language: 'en',
+      original_title: 'Happy Campers',
+      genre_ids: [Array],
+      backdrop_path: '/71SrEdpHakjzpTmPTqzEnTmGCPx.jpg',
+      adult: false,
+      overview: 'Chaos and rampant hormones reign when teenage counselors are left in charge during their summer-camp director\'s absence.',
+      release_date: '2001-01-21'
+    },
+    {
+      vote_count: 30,
+      id: 412762,
+      video: false,
+      vote_average: 5.2,
+      title: 'Happy Hunting',
+      popularity: 2.019,
+      poster_path: '/cvFE9RlFHTobOEceRyf9iQLPHSk.jpg',
+      original_language: 'en',
+      original_title: 'Happy Hunting',
+      genre_ids: [Array],
+      backdrop_path: '/eC8Y6plhvkrIunRdDNNMXbs8E9Z.jpg',
+      adult: false,
+      overview: 'An alcoholic drifter must battle withdrawal and psychotic rednecks after he becomes the target of a deranged sporting event.',
+      release_date: '2017-09-22'
+    },
+    {
+      vote_count: 5,
+      id: 202721,
+      video: false,
+      vote_average: 5.3,
+      title: 'Happy Husbands',
+      popularity: 1.595,
+      poster_path: '/iKirqW8WF8z0bYB3mdOuZ3pUq99.jpg',
+      original_language: 'ml',
+      original_title: 'ഹാപ്പി ഹസ്ബന്‍ഡ്‌സ്',
+      genre_ids: [Array],
+      backdrop_path: '/tUzbTjDM2KOmzSy4a5OaFl9lVc.jpg',
+      adult: false,
+      overview: 'Mukundan Menon runs a magazine called Kerala Today. He is a normal husband who loves his wife Krishnendu  a lot, but she is too possessive about him. She thinks he is not very expressive about his feelings, and is always worried that he might one day fall for some other beautiful girl.  Rahul  is just the opposite. He is extremely romantic and never comes home without some cute gifts for his wife, Shreya. But she doesn\'t know that, behind her back, her darling husband is dying to flirt with every woman that he sees.  John Mathai  is a photographer in Mukundan\'s publication. He was neither interested in girls nor keen to get married until he met Sereena .  It is into the lives of these three couples that a bar singer, Diana, arrives and things take some interesting turns.',
+      release_date: '2010-01-13'
+    },
+    {
+      vote_count: 10,
+      id: 139592,
+      video: false,
+      vote_average: 7.1,
+      title: 'Happy Anniversary',
+      popularity: 1.223,
+      poster_path: '/fCwv5tI9HkwVs6lYVYKHSM2ka46.jpg',
+      original_language: 'fr',
+      original_title: 'Heureux anniversaire',
+      genre_ids: [Array],
+      backdrop_path: '/3FG4GaxrfnTmxve3BAveR9fASmE.jpg',
+      adult: false,
+      overview: 'While his wife impatiently waits and gets drunk, a husband tries to get the appropriate anniversary gifts and fight his way home through traffic in time for their celebratory lunch.',
+      release_date: '1962-01-01'
+    },
+    {
+      vote_count: 24,
+      id: 406625,
+      video: false,
+      vote_average: 4.5,
+      title: 'Happy Birthday',
+      popularity: 1.785,
+      poster_path: '/kJ5uEAb07pq7YgWI9Jzu3q802je.jpg',
+      original_language: 'en',
+      original_title: 'Happy Birthday',
+      genre_ids: [Array],
+      backdrop_path: '/cQSIKgr91nZTMvBYvP7AvBGhJeO.jpg',
+      adult: false,
+      overview: 'When two friends embark on a journey to Mexicali for a Birthday celebration, they soon realize their psychedelic shenanigans have taken a turn for the worse.',
+      release_date: '2016-08-15'
+    },
+    {
+      vote_count: 0,
+      id: 129468,
+      video: false,
+      vote_average: 0,
+      title: 'Happy Hotel',
+      popularity: 1.4,
+      poster_path: '/1b8mwEaE8Ok2ddfa31tBTA0QXND.jpg',
+      original_language: 'en',
+      original_title: '樂翻天',
+      genre_ids: [],
+      backdrop_path: null,
+      adult: false,
+      overview: 'The film is a black comedy about a group of people who try and work their way out of an unfortunate set of circumstances.',
+      release_date: '2012-08-02'
+    },
+    {
+      vote_count: 0,
+      id: 269733,
+      video: false,
+      vote_average: 0,
+      title: 'Happy Together',
+      popularity: 1.382,
+      poster_path: '/g6FRToArqdG9c9SzeWCnONHwN7m.jpg',
+      original_language: 'cn',
+      original_title: '相見好',
+      genre_ids: [],
+      backdrop_path: null,
+      adult: false,
+      overview: 'Kenny Bee works for a large Hong Kong corporation who\'s business practice is not exactly honorable. But he is being promoted to upper management with all its perks. Cherie Chung is a woman reporter working for Hong Kong TV station who is trying to expose the corrupt practice of the company Kenny works at. By chance they get together by being shoved into the same taxi while they\'re totally drunk. They again meet while grocery shopping, but they get robbed and Kenny can\'t go back to his home without money for the ferry. This starts a relationship between them, and from conscience, Kenny decides to expose the corruption within his company. Vivian Chow plays a secondary role as semi love triangle between Cherie and Kenny.',
+      release_date: '1989-08-19'
+    },
+    {
+      vote_count: 56,
+      id: 60422,
+      video: false,
+      vote_average: 5.9,
+      title: 'Another Happy Day',
+      popularity: 2.742,
+      poster_path: '/aS9OSXIfOj6HSfKVR4fDGf6cIZF.jpg',
+      original_language: 'en',
+      original_title: 'Another Happy Day',
+      genre_ids: [Array],
+      backdrop_path: '/eAXlPAnBnyjtoXNA9vFggU2IKWF.jpg',
+      adult: false,
+      overview: 'A wedding at her parents\' Annapolis estate hurls high-strung Lynn into the center of touchy family dynamics.',
+      release_date: '2011-11-18'
+    },
+    {
+      vote_count: 63,
+      id: 89704,
+      video: false,
+      vote_average: 7.7,
+      title: 'Happy People: A Year in the Taiga',
+      popularity: 5.525,
+      poster_path: '/s6t6UCe9ZB08yQGaUxJHQaIIPO6.jpg',
+      original_language: 'en',
+      original_title: 'Happy People: A Year in the Taiga',
+      genre_ids: [Array],
+      backdrop_path: '/3Cf7DlzYwtUAzMgA8I0iIIbHyAI.jpg',
+      adult: false,
+      overview: 'In the center of the story is the life of the indigenous people of the village Bakhtia at the river Yenisei in the Siberian Taiga. The camera follows the protagonists in the village over a period of a year. The natives, whose daily routines have barely changed over the last centuries, keep living their lives according to their own cultural traditions.',
+      release_date: '2010-09-03'
+    },
+    {
+      vote_count: 12,
+      id: 39072,
+      video: false,
+      vote_average: 4.7,
+      title: 'Happy Tears',
+      popularity: 1.725,
+      poster_path: '/3AOo3kgZ1cdgz8qPB65TpOj9QMN.jpg',
+      original_language: 'en',
+      original_title: 'Happy Tears',
+      genre_ids: [Array],
+      backdrop_path: '/wfY8P7alAtsppv5ZG19WPjFIVNf.jpg',
+      adult: false,
+      overview: 'Two sisters return home to care for their aging father.',
+      release_date: '2009-10-16'
+    },
+    {
+      vote_count: 2,
+      id: 540263,
+      video: false,
+      vote_average: 7.5,
+      title: 'Happy Wedding',
+      popularity: 1.359,
+      poster_path: '/pVaugNVqnEkGj0tRqtyZRV9UDjV.jpg',
+      original_language: 'te',
+      original_title: 'Happy Wedding',
+      genre_ids: [Array],
+      backdrop_path: '/r2KA2jynWzvTVaAQ140DfMteDhF.jpg',
+      adult: false,
+      overview: 'A simpleton guy Anand and a modern girl Akshara fall in love and decide to get married. However, their lives turn upside down when Akshara\'s past walks back in her life, making her have second thoughts on their wedding day.',
+      release_date: '2018-07-28'
+    },
+    {
+      vote_count: 9,
+      id: 497863,
+      video: false,
+      vote_average: 7.3,
+      title: 'Happy New Year, Colin Burstead',
+      popularity: 3.541,
+      poster_path: '/l1RtxOgL3AKb6NY61nWlewmyqpP.jpg',
+      original_language: 'en',
+      original_title: 'Happy New Year, Colin Burstead',
+      genre_ids: [Array],
+      backdrop_path: '/bDpMfZ6wf4bBYr0btnCwgeFCVPr.jpg',
+      adult: false,
+      overview: 'Colin has rented a stately country home for his extended family’s New Year celebrations. He’s the centre of attention until his estranged brother David unexpectedly arrives, throwing the family dynamic far off orbit.',
+      release_date: '2018-10-11'
+    },
+    {
+      vote_count: 22,
+      id: 303281,
+      video: false,
+      vote_average: 5.2,
+      title: 'Happy Ending',
+      popularity: 1.643,
+      poster_path: '/xAiIWa12o3yVpzQpMv4uh4EKFwu.jpg',
+      original_language: 'en',
+      original_title: 'Happy Ending',
+      genre_ids: [Array],
+      backdrop_path: '/fFwFaelhVF4qLbGh6BuOtEr5Mtl.jpg',
+      adult: false,
+      overview: 'Yudi’s happy life is about to encounter a speed breaker-his BMW gets towed away and his dues have started piling up. He’s run out of money and luck! To make matters worse-his supposed ex-girlfriend isn’t really his ex.',
+      release_date: '2014-11-21'
+    },
+    {
+      vote_count: 22,
+      id: 27154,
+      video: false,
+      vote_average: 6.5,
+      title: 'Happy End',
+      popularity: 4.221,
+      poster_path: '/5S8G9vCece5cG14vmUtUbTjCqTE.jpg',
+      original_language: 'ko',
+      original_title: '해피 엔드',
+      genre_ids: [Array],
+      backdrop_path: '/h6YL8nA0FLM9EuoTFi0RYYJfo1f.jpg',
+      adult: false,
+      overview: 'Set during the 1999 Asian fiscal crisis Ki-Mun has lost his job and feels ashamed at having to act as domestic housekeepr for his career woman wife Bo-ra. Bo-ra feels trapped in a passionless marriage and is having an affair with a former college boyfriend. Min-ki gradually pieces together the evidence of Bo-ra\'s infidelity, and is devastated by what he finds.',
+      release_date: '1999-12-11'
+    },
+    {
+      vote_count: 0,
+      id: 425918,
+      video: true,
+      vote_average: 0,
+      title: 'Happy',
+      popularity: 0.6,
+      poster_path: '/qHn3ZGsdRu6Rsy8x0dCtiYECDc5.jpg',
+      original_language: 'en',
+      original_title: 'Happy',
+      genre_ids: [Array],
+      backdrop_path: null,
+      adult: false,
+      overview: 'An animated poem about the fleeting nature of happiness.',
+      release_date: '2016-11-13'
+    }]
+}
+
+export const creditsResponseRaw = {
+  id: 9614,
+  cast:
+    [{
+      cast_id: 11,
+      character: 'Happy Gilmore',
+      credit_id: '52fe4511c3a36847f80ba93d',
+      gender: 2,
+      id: 19292,
+      name: 'Adam Sandler',
+      order: 0,
+      profile_path: '/tv9V6QsuZ3bcp4ciUJjwjcc4qAg.jpg'
+    },
+    {
+      cast_id: 12,
+      character: 'Shooter McGavin',
+      credit_id: '52fe4511c3a36847f80ba941',
+      gender: 2,
+      id: 4443,
+      name: 'Christopher McDonald',
+      order: 1,
+      profile_path: '/gK1XhbfD9Xd8s3VXRPpgDCluyZp.jpg'
+    },
+    {
+      cast_id: 13,
+      character: 'Virginia Venit',
+      credit_id: '52fe4511c3a36847f80ba945',
+      gender: 1,
+      id: 31171,
+      name: 'Julie Bowen',
+      order: 2,
+      profile_path: '/ad7u7IYpUZbhQPdzQ688fCSk0OX.jpg'
+    },
+    {
+      cast_id: 14,
+      character: 'Grandma Gilmore',
+      credit_id: '52fe4511c3a36847f80ba949',
+      gender: 0,
+      id: 11794,
+      name: 'Frances Bay',
+      order: 3,
+      profile_path: '/uaT5z1YQKZZ8WcYsnOnnI6DRWdW.jpg'
+    },
+    {
+      cast_id: 18,
+      character: 'Otto',
+      credit_id: '52fe4511c3a36847f80ba959',
+      gender: 2,
+      id: 20818,
+      name: 'Allen Covert',
+      order: 4,
+      profile_path: '/7A7pGOFmHZ4eCFm3cDtgxwxOu4e.jpg'
+    },
+    {
+      cast_id: 21,
+      character: 'IRS Agent',
+      credit_id: '52fe4511c3a36847f80ba965',
+      gender: 2,
+      id: 53684,
+      name: 'Robert Smigel',
+      order: 5,
+      profile_path: '/fBJaWXCzwnzrdZx6PkFiwhEClSh.jpg'
+    },
+    {
+      cast_id: 17,
+      character: 'Himself',
+      credit_id: '52fe4511c3a36847f80ba955',
+      gender: 2,
+      id: 170802,
+      name: 'Bob Barker',
+      order: 6,
+      profile_path: '/4ex3lzv9LEibpLibFkqSdWiRBMz.jpg'
+    },
+    {
+      cast_id: 16,
+      character: 'Mr. Larson',
+      credit_id: '52fe4511c3a36847f80ba951',
+      gender: 0,
+      id: 10460,
+      name: 'Richard Kiel',
+      order: 7,
+      profile_path: '/wop4KV2ywl6gdYnCUs1OthtGylM.jpg'
+    },
+    {
+      cast_id: 22,
+      character: 'Doug Thompson',
+      credit_id: '52fe4511c3a36847f80ba969',
+      gender: 2,
+      id: 17494,
+      name: 'Dennis Dugan',
+      order: 8,
+      profile_path: '/A9Hv8qqB4fgb5IMjEESzBo8LXPZ.jpg'
+    },
+    {
+      cast_id: 19,
+      character: 'Jeering Fan',
+      credit_id: '52fe4511c3a36847f80ba95d',
+      gender: 2,
+      id: 59196,
+      name: 'Joe Flaherty',
+      order: 9,
+      profile_path: '/eQWzl4MazEkiaIsSuLIBBWB9zV9.jpg'
+    },
+    {
+      cast_id: 20,
+      character: 'Himself',
+      credit_id: '52fe4511c3a36847f80ba961',
+      gender: 0,
+      id: 392685,
+      name: 'Lee Trevino',
+      order: 10,
+      profile_path: null
+    },
+    {
+      cast_id: 23,
+      character: 'Potter',
+      credit_id: '52fe4511c3a36847f80ba96d',
+      gender: 2,
+      id: 58478,
+      name: 'Kevin Nealon',
+      order: 11,
+      profile_path: '/8IyCgKbjDTBlIICz49igBskwssS.jpg'
+    },
+    {
+      cast_id: 24,
+      character: 'Announcer',
+      credit_id: '52fe4511c3a36847f80ba971',
+      gender: 2,
+      id: 1024638,
+      name: 'Verne Lundquist',
+      order: 12,
+      profile_path: '/AkUVqg2rkExTneawEUSYFjYnv8O.jpg'
+    },
+    {
+      cast_id: 25,
+      character: 'Happy\'s Waterbury Caddy',
+      credit_id: '52fe4511c3a36847f80ba975',
+      gender: 0,
+      id: 191857,
+      name: 'Jared Van Snellenberg',
+      order: 13,
+      profile_path: null
+    },
+    {
+      cast_id: 26,
+      character: 'Coach',
+      credit_id: '52fe4511c3a36847f80ba979',
+      gender: 0,
+      id: 106789,
+      name: 'Ken Camroux',
+      order: 14,
+      profile_path: null
+    },
+    {
+      cast_id: 15,
+      character: 'Chubbs',
+      credit_id: '52fe4511c3a36847f80ba94d',
+      gender: 2,
+      id: 1101,
+      name: 'Carl Weathers',
+      order: 15,
+      profile_path: '/xOpDfVa83R1EdiNkWPNITfCH67e.jpg'
+    },
+    {
+      cast_id: 31,
+      character: 'Terry',
+      credit_id: '5a3eb13c9251411fd5011ec7',
+      gender: 0,
+      id: 1237735,
+      name: 'Nancy McClure',
+      order: 16,
+      profile_path: null
+    },
+    {
+      cast_id: 32,
+      character: 'Chinese Lady',
+      credit_id: '5a3eb162c3a3680bc7015f0e',
+      gender: 1,
+      id: 1234363,
+      name: 'Helena Yea',
+      order: 17,
+      profile_path: '/b67aaAC8B0M1nZmCK2xXVoNwSKb.jpg'
+    },
+    {
+      cast_id: 28,
+      character: 'Mover',
+      credit_id: '5a3eb044c3a3680bac015171',
+      gender: 2,
+      id: 39125,
+      name: 'Will Sasso',
+      order: 18,
+      profile_path: '/5Lz3WLWkgU04Fy4Xa0pjE5U53Wi.jpg'
+    },
+    {
+      cast_id: 29,
+      character: 'Mover',
+      credit_id: '5a3eb05a0e0a2620e9016dfc',
+      gender: 0,
+      id: 1187262,
+      name: 'Dee Jay Jackson',
+      order: 19,
+      profile_path: '/15lgEarOZFmS2BZj7PQxNd8SdrV.jpg'
+    },
+    {
+      cast_id: 30,
+      character: 'Registrar',
+      credit_id: '5a3eb0730e0a2620e9016e23',
+      gender: 1,
+      id: 158644,
+      name: 'Ellie Harvie',
+      order: 20,
+      profile_path: '/lXY9BNsFKIf7gGMSrxjR1BH3Fko.jpg'
+    },
+    {
+      cast_id: 33,
+      character: 'Guy on Green',
+      credit_id: '5a3eb17b9251411f3e011810',
+      gender: 2,
+      id: 45917,
+      name: 'Ian Boothby',
+      order: 21,
+      profile_path: null
+    },
+    {
+      cast_id: 27,
+      character: 'Hal L. - Orderly in Nursing Home (uncredited)',
+      credit_id: '593b0a1f92514105cf000b26',
+      gender: 2,
+      id: 7399,
+      name: 'Ben Stiller',
+      order: 22,
+      profile_path: '/twp3oBAcOIZlwYTxzNgac3YsCPu.jpg'
+    }],
+  crew:
+    [{
+      credit_id: '52fe4511c3a36847f80ba903',
+      department: 'Directing',
+      gender: 2,
+      id: 17494,
+      job: 'Director',
+      name: 'Dennis Dugan',
+      profile_path: '/A9Hv8qqB4fgb5IMjEESzBo8LXPZ.jpg'
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba909',
+      department: 'Writing',
+      gender: 2,
+      id: 56728,
+      job: 'Screenplay',
+      name: 'Tim Herlihy',
+      profile_path: '/AtY9Nec0ETxmtcOYBgXUvPYojj2.jpg'
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba90f',
+      department: 'Writing',
+      gender: 2,
+      id: 19292,
+      job: 'Screenplay',
+      name: 'Adam Sandler',
+      profile_path: '/tv9V6QsuZ3bcp4ciUJjwjcc4qAg.jpg'
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba915',
+      department: 'Production',
+      gender: 2,
+      id: 29015,
+      job: 'Producer',
+      name: 'Robert Simonds',
+      profile_path: '/grmMtSd8FgIy3phR0pKVGABP97f.jpg'
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba91b',
+      department: 'Production',
+      gender: 2,
+      id: 8859,
+      job: 'Executive Producer',
+      name: 'Bernie Brillstein',
+      profile_path: '/mLFQdesNwMtvo3E64U2LnV8s4tG.jpg'
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba921',
+      department: 'Production',
+      gender: 2,
+      id: 1298,
+      job: 'Executive Producer',
+      name: 'Brad Grey',
+      profile_path: '/7PntYF8xh3wqBEn7YvOXeovrk5R.jpg'
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba927',
+      department: 'Sound',
+      gender: 2,
+      id: 5666,
+      job: 'Original Music Composer',
+      name: 'Mark Mothersbaugh',
+      profile_path: '/AoQ4Prrg039LlQiwBNANXn8VVkg.jpg'
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba92d',
+      department: 'Camera',
+      gender: 2,
+      id: 58187,
+      job: 'Director of Photography',
+      name: 'Arthur Albert',
+      profile_path: null
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba933',
+      department: 'Editing',
+      gender: 2,
+      id: 12865,
+      job: 'Editor',
+      name: 'Jeff Gourson',
+      profile_path: null
+    },
+    {
+      credit_id: '52fe4511c3a36847f80ba939',
+      department: 'Editing',
+      gender: 2,
+      id: 58188,
+      job: 'Editor',
+      name: 'Steve R. Moore',
+      profile_path: null
+    }],
+};
+
+export const detailsResponseRaw = {
+  adult: false,
+  backdrop_path: '/z5qwh317CANMZO7KMPAEepwxlyq.jpg',
+  belongs_to_collection: null,
+  budget: 10000000,
+  genres: [{ id: 35, name: 'Comedy' }],
+  homepage: null,
+  id: 9614,
+  imdb_id: 'tt0116483',
+  original_language: 'en',
+  original_title: 'Happy Gilmore',
+  overview: 'Failed hockey player-turned-golf whiz Happy Gilmore -- whose unconventional approach and antics on the grass courts the ire of rival Shooter McGavin -- is determined to win a PGA tournament so he can save his granny\'s house with the prize money. Meanwhile, an attractive tour publicist tries to soften Happy\'s image.',
+  popularity: 11.82,
+  poster_path: '/4RnCeRzvI1xk5tuNWjpDKzSnJDk.jpg',
+  production_companies:
+    [{
+      id: 33,
+      logo_path: '/8lvHyhjr8oUKOOy2dKXoALWKdp0.png',
+      name: 'Universal Pictures',
+      origin_country: 'US'
+    },
+    {
+      id: 1606,
+      logo_path: null,
+      name: 'Brillstein-Grey Entertainment',
+      origin_country: ''
+    },
+    {
+      id: 3929,
+      logo_path: null,
+      name: 'Robert Simonds Productions',
+      origin_country: ''
+    }],
+  production_countries: [{ iso_3166_1: 'US', name: 'United States of America' }],
+  release_date: '1996-02-16',
+  revenue: 0,
+  runtime: 92,
+  spoken_languages: [{ iso_639_1: 'en', name: 'English' }],
+  status: 'Released',
+  tagline: 'He doesn\'t play golf... he destroys it.',
+  title: 'Happy Gilmore',
+  video: false,
+  vote_average: 6.5,
+  vote_count: 1258
+};

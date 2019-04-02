@@ -1,15 +1,15 @@
 import express from 'express';
-// import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import fetch from 'node-fetch';
 import { ApolloServer, gql } from 'apollo-server-express';
 import merge from 'lodash.merge';
 
 import {
+  dataSource as MovieApi,
   typeDef as Movie,
   resolvers as movieResolvers,
 } from './resolvers/Movie';
 import {
+  dataSource as PersonApi,
   typeDef as Person,
   resolvers as personResolvers,
 } from './resolvers/Person';
@@ -35,7 +35,16 @@ const Query = gql`
 const typeDefs = [Query, Movie, Person];
 const resolvers = merge(movieResolvers, personResolvers);
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => {
+    return {
+      movieApi: new MovieApi(),
+      personApi: new PersonApi(),
+    };
+  },
+});
 
 const app: express.Application = express();
 
