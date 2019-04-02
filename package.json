@@ -14,8 +14,9 @@
     "install-client": "cd client && yarn",
     "install-server": "yarn",
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "server": "concurrently --kill-others-on-fail \"redis-server\" \"yarn ts-server\"",
     "prod": "tsc && node ./build/index.js",
-    "server": "ts-node-dev --respawn --transpileOnly ./server/index.ts",
+    "ts-server": "ts-node-dev --respawn --transpileOnly ./server/index.ts",
     "test": "yarn jest",
     "test-client": "cd client && yarn test",
     "tsc": "tsc"
@@ -25,12 +26,12 @@
   "license": "ISC",
   "dependencies": {
     "apollo-datasource-rest": "^0.3.2",
+    "apollo-server-cache-redis": "^0.3.1",
     "apollo-server-express": "^2.4.8",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "graphql": "^14.1.1",
-    "lodash.merge": "^4.6.1",
-    "redis": "^2.8.0"
+    "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.0",
@@ -38,12 +39,9 @@
     "@types/jest": "^24.0.11",
     "@types/lodash.merge": "^4.6.6",
     "@types/react-test-renderer": "^16.8.1",
-    "@types/redis": "^2.8.11",
-    "@types/redis-mock": "^0.17.0",
     "apollo-server-testing": "^2.4.8",
     "concurrently": "^4.1.0",
     "jest": "^24.5.0",
-    "redis-mock": "^0.43.0",
     "ts-jest": "^24.0.0",
     "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "^3.3.3333",

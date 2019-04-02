@@ -8,6 +8,10 @@ Since we would probably want to maintain them separately they each have a packag
 it would have been a good idea to use yarn workspaces.
 
 ## Quick Start
+You will need `redis-server` installed locally
+```
+brew install redis
+```
 To set up the project the following command will install the proper dependencies for both the
 client and the server.
 ```
@@ -16,11 +20,6 @@ yarn setup
 To run the project
 ```
 yarn start
-```
-if you have redis installed on your machine locally you can get
-data caching (this is not required to run the project)
-```
-redis-server
 ```
 after looking at a few items (movies/actors)
 check the cache
@@ -44,7 +43,7 @@ yarn storybook
 
 ## The Tech
 * Express - because it's unopinionated, minimalist, and fast to setup.
-* Redis - data caching for MovieDetails/PersonDetails (I couldn't think of a good way to cache searches 😟)
+* Redis - data caching
 * Typescript - because of the community.
 * React - because 😍
 * GraphQL - because 😍
