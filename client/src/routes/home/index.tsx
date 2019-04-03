@@ -18,7 +18,7 @@ import { MovieResponse, MovieVariables } from '../../types/Api';
 
 class MovieQuery extends Query<MovieResponse, MovieVariables> {}
 
-const query = gql`
+export const query = gql`
   query Movies($search: String, $page: Int){
     movies(search: $search, page: $page) {
       page
